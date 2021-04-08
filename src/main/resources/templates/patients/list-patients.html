@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+	<title>Patient Directory</title>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/}">Polyclinic Online</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/doctors/list}">Doctors <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/diagnoses/list}">Diagnoses <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/patients/list}">Patients <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/medical-services/list}">Medical Services <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/specialities/list}">Specialties <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/visits/list}">Visits <span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</head>
+
+<body>
+	<div class="container">
+		<h3>Patient Directory</h3>
+		<hr>
+
+		<a th:href="@{/patients/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+			Add Patient
+		</a>
+
+		<table class="table table-borered table-striped">
+			<tbody>
+			<thead class="thead-dark">
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Address</th>
+					<th>Day Of Birth</th>
+					<th>Phone Number</th>
+					<th>Note</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tr th:each="tempPatient : ${patients}">
+				<td th:text="${tempPatient.firstName}"></td>
+				<td th:text="${tempPatient.lastName}"></td>
+				<td th:text="${tempPatient.address}"></td>
+				<td th:text="${tempPatient.dayOfBirth}"></td>
+				<td th:text="${tempPatient.phoneNumber}"></td>
+				<td th:text="${tempPatient.note}"></td>
+
+				<td>
+					<a th:href="@{/patients/showFormForUpdate(patientId=${tempPatient.id})}" class="btn btn-info btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/patients/delete(patientId=${tempPatient.id})}" class="btn btn-danger btn-sm"
+						onclick="if (!(confirm('Are you sure you want to delete this patient?'))) return false">
+						Delete
+					</a>
+
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

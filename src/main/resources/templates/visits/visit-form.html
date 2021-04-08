@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<title>Save Visit</title>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/}">Polyclinic Online</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/doctors/list}">Doctors <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/diagnoses/list}">Diagnoses <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/patients/list}">Patients <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/medical-services/list}">Medical Services <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/specialities/list}">Specialties <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/visits/list}">Visits <span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</head>
+
+<body>
+	<div class="container">
+		<h3>Visit Directory</h3>
+		<hr>
+
+		<p class="h4 mb-4">Save Visit</p>
+
+		<form action="#" th:action="@{/visits/save}" th:object="${visit}" method="POST">
+
+			<input type="hidden" th:field="*{id}" />
+
+			<select name="patient" th:field="*{patient}">
+				<option th:each="patient : ${patients}" th:value="${patient.id}"
+					th:text="${patient.lastName} + ' ' + ${patient.firstName}">
+				</option>
+			</select>
+			<br>
+
+			<select name="doctor" th:field="*{doctor}">
+				<option th:each="doctor : ${doctors}" th:value="${doctor.id}"
+					th:text="${doctor.firstName} + ' ' + ${doctor.firstName}">
+				</option>
+			</select>
+			<br>
+
+			<input type="text"
+				pattern="/([0-2][0-9]{3})\-([0-1][0-9])\-([0-3][0-9])\s([0-5][0-9])\:([0-5][0-9])\:([0-5][0-9])(Z|([\-\+]([0-1][0-9])\:00))/"
+				th:field="*{date}" class="form-control mb-4 col-4" placeholder="Date"
+				title="Enter a date in this format YYYY-MM-DD HH:MM:SS" />
+			<br>
+
+			<select name="diagnosis" th:field="*{diagnosis}">
+				<option th:each="diagnosis : ${diagnoses}" th:value="${diagnosis.id}" th:text="${diagnosis.name}">
+				</option>
+			</select>
+			<br>
+
+			<button type="submit" class="btn btn-info col-2">Save</button>
+
+		</form>
+
+		<hr>
+		<a th:href="@{/visits/list}">Back to Visits List</a>
+
+	</div>
+</body>
+
+</html>

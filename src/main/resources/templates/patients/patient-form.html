@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<title>Save Patient</title>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/}">Polyclinic Online</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/doctors/list}">Doctors <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/diagnoses/list}">Diagnoses <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/patients/list}">Patients <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/medical-services/list}">Medical Services <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/specialities/list}">Specialties <span
+							class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" th:href="@{/visits/list}">Visits <span class="sr-only">(current)</span></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</head>
+
+<body>
+	<div class="container">
+		<h3>Patient Directory</h3>
+		<hr>
+
+		<p class="h4 mb-4">Save Patient</p>
+
+		<form action="#" th:action="@{/patients/save}" th:object="${patient}" method="POST">
+
+			<input type="hidden" th:field="*{id}" />
+
+			<input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name" />
+
+			<input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name" />
+
+			<input type="text" th:field="*{address}" class="form-control mb-4 col-4" placeholder="Address" />
+
+			<input type="text" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+				th:field="*{dayOfBirth}" class="form-control mb-4 col-4" placeholder="Day of Birth"
+				title="Enter a date in this format YYYY-MM-DD" />
+
+			<input type="text" th:field="*{phoneNumber}" class="form-control mb-4 col-4" placeholder="Phone Number" />
+			
+			<textarea type="text" th:field="*{note}" class="form-control mb-4 col-4" placeholder="Note" />
+
+			<button type="submit" class="btn btn-info col-2">Save</button>
+
+		</form>
+
+		<hr>
+		<a th:href="@{/patients/list}">Back to Patients List</a>
+
+	</div>
+</body>
+
+</html>
